@@ -1,17 +1,30 @@
-
+import mongoose from "mongoose";
 import { useSession } from "next-auth/react";
+import useSWR from 'swr'
+import { useState } from "react";
 
 
-const options = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-}
+/*export function getServerSideProps(context) {
+
+    const options = {
+     useUnifiedTopology: true,
+     useNewUrlParser: true
+    }
+
+    const connection = mongoose.createConnection(process.env.DATABASE_URL, options)
+
+    const UserSchema = mongoose.Schema({
+        
+    })
+
+} */
+
 
 export default function Info() {
     
     const {data: session} = useSession();
     console.log(session.user.name)
-
+    const [state, setState] = useState([{servicePasswords: []}]);
     {/*const connection = mongoose.createConnection(process.env.DATABASE_URL, options)
    
     const userSchema = mongoose.Schema({
@@ -27,6 +40,49 @@ export default function Info() {
 
 */}
 
+
+
+  {/*  const fetcher = (...args) => fetch(...args, {
+        cache: JSON.stringify(session.user.name),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+    }).then((res) => res.json())
+
+    function Profile() {
+        const { data, error } = useSWR('/api/handleLoad', fetcher)
+
+          if (error) return <div>Failed to load</div>
+          if (!data) return <div>Loading...</div>
+
+      return (
+     <div>
+       <h1>{data.name}</h1>
+      </div>
+  )
+}*/}
+
+    const ShowPasswords = async (e) => {
+        e.preventDefault();
+        const form  = new FormData(e.target);
+        const formData = Object.fromEntries(form.entries());
+
+        const res = await fetch('/api/handleLoad',{
+            body: JSON.stringify(formData),
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+        })
+
+        const result = await res.json();
+        console.log(result.found[0]);
+        const PasswordList = result.found[0].ServicePasswords;
+        setState(PasswordList)    
+
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,20 +100,33 @@ export default function Info() {
         const result = await res.json();
         console.log(result)
     }
+ 
+    
 
     if(session){
        
     return (
         <>
+        <div >
         <form onSubmit={handleSubmit}>
             <label>Service:</label>
-           <input style={{display: 'none'}} name="user" value={session.user.name}  />
+           <input style={{display: 'none'}} readOnly name="user" value={session.user.name}  />
             <input name="service" type="text" placeholder="ex: Google"/>
             <label>Password</label>
             <input name="password" type="password" placeholder="password"/>
             <button>Generate password</button>
             <button type="submit">Submit</button>
         </form>
+        <form onSubmit={ShowPasswords}>
+            <input style={{display: 'none'}} readOnly name="user" value={session.user.name}/>
+            <button type="submit">Show Passwords</button>
+        </form>
+        
+        <ul>
+          {state.map((i) => {
+              <li>{i}</li>
+          })}
+        </ul>
        {/*<ul>
             {passwordList.map((index) => {
                 <>
@@ -66,7 +135,7 @@ export default function Info() {
                 </>
             })}
         </ul>*/}
-
+        </div>
         </>
     )
 }else{
