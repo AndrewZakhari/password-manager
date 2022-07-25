@@ -24,7 +24,7 @@ export default function Info() {
     
     const {data: session} = useSession();
     console.log(session.user.name)
-    const [state, setState] = useState([{servicePasswords: []}]);
+    const [state, setState] = useState(0);
     {/*const connection = mongoose.createConnection(process.env.DATABASE_URL, options)
    
     const userSchema = mongoose.Schema({
@@ -100,11 +100,52 @@ export default function Info() {
         const result = await res.json();
         console.log(result)
     }
- 
+
     
 
     if(session){
-       
+       if(state !== 0){
+           console.log('state is not 0')
+           console.log(
+            state.toString().split(',')
+           )
+           const arr = state.map((i) => {
+               <li>{i}</li>
+           })
+           return (
+               <>
+                <div>
+                <form onSubmit={handleSubmit}>
+            <label>Service:</label>
+           <input style={{display: 'none'}} readOnly name="user" value={session.user.name}  />
+            <input name="service" type="text" placeholder="ex: Google"/>
+            <label>Password</label>
+            <input name="password" type="password" placeholder="password"/>
+            <button>Generate password</button>
+            <button type="submit">Submit</button>
+          </form>
+          <form onSubmit={ShowPasswords}>
+            <input style={{display: 'none'}} readOnly name="user" value={session.user.name}/>
+            <button type="submit">Show Passwords</button>
+            </form>
+        
+        <ul>
+        {state[0]} <br />
+        {state[1]} <br />
+        {state[2]} <br />
+        {state[3]} <br />
+        {state[4]} <br />
+        {state[5]} <br />
+        {state[6]} <br />
+        {state[7]} <br />
+        {state[8]} <br />
+        {state[9]} <br />
+        
+        </ul>
+                </div> 
+               </>
+           )
+       }else{
     return (
         <>
         <div >
@@ -123,9 +164,6 @@ export default function Info() {
         </form>
         
         <ul>
-          {state.map((i) => {
-              <li>{i}</li>
-          })}
         </ul>
        {/*<ul>
             {passwordList.map((index) => {
@@ -137,7 +175,7 @@ export default function Info() {
         </ul>*/}
         </div>
         </>
-    )
+    )}
 }else{
     return (
         <>
