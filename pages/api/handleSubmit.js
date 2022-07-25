@@ -45,15 +45,11 @@ export default async function handler(req, res) {
         }
     })
     }
+    
+    Service.find({username: user},(err, data) => {
+        res.status(200).json({data})
+    } )
 
-    const serviceList = Service.find({username: user}, (err, found) => {
-        if(err) console.error(err);
-        console.log(found)
-        return found
-    });
-
-    console.log(serviceList)
-    res.json(serviceList)
 }
 
     

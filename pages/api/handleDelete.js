@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default function handler(req,res) {
-    const {user} = req.body
+    const {user, index} = req.body
     console.log(req.body)
     if(req.body.user && req.method === 'POST'){
 
@@ -19,9 +19,17 @@ export default function handler(req,res) {
 
         const Service = connection.model("Service", UserSchema)
 
-        Service.find({username: user}, (err, found) => {
+        Service.findOne({username: user}, (err, found) => {
             if(err) console.error(err);
-            res.status(200).json({found})
+            found.ServicePasswords.map((i) => {
+                console.log(i)
+            })
+            console.log(index)
+            found.save((err, updated) => {
+                if(err) console.error(err)
+                console.log(updated)
+                res.status(200).json({updated})
+            } )
         })
     }
     
