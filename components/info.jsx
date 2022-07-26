@@ -81,7 +81,7 @@ export default function Info() {
             <>
             {state.map((value, index) => {
                 return(
-                <form className={styles.list} onSubmit={handleDelete}>
+                <form key={index} className={styles.list} onSubmit={handleDelete}>
                     <input style={{display: 'none'}} readOnly name="user" value={session.user.name} />
                     <input style={{display: 'none'}} readOnly value={testState}/>
                     <input value={index} name="index" style={{display: 'none'}}></input>
