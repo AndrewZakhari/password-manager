@@ -1,0 +1,30 @@
+.container{
+    height: max-content;
+    min-height: 100vh;
+    background-image: url(../public/blob-scene-haikei.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    color: white;
+    align-items: center;
+    flex-direction: column; 
+}
+.list{
+
+    background-color:rgba(0, 0, 0, 0.5) ;
+    max-width: fit-content;
+    border-radius: 1vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 10px;
+}
+.mainForm {
+    
+    padding: 10px;
+    background-color:rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    border-radius: 1vw;
+}

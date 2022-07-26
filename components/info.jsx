@@ -1,28 +1,9 @@
-import mongoose, { set } from "mongoose";
+import styles from '../styles/info.module.css';
 import { useSession } from "next-auth/react";
-import useSWR from 'swr'
 import { useState } from "react";
 const PasswordGenerator = require('strict-password-generator').default;
 
 const passwordGenerator = new PasswordGenerator();
-
-let password = passwordGenerator.generatePassword();
-
-
-/*export function getServerSideProps(context) {
-
-    const options = {
-     useUnifiedTopology: true,
-     useNewUrlParser: true
-    }
-
-    const connection = mongoose.createConnection(process.env.DATABASE_URL, options)
-
-    const UserSchema = mongoose.Schema({
-        
-    })
-
-} */
 
 
 export default function Info() {
@@ -31,43 +12,7 @@ export default function Info() {
     const [clicked, setClick] = useState(false);
     const [passState, setPassState] = useState();
     const [testState, setTestState]  = useState();
-    {/*const connection = mongoose.createConnection(process.env.DATABASE_URL, options)
-   
-    const userSchema = mongoose.Schema({
-        name : String,
-        passwords: {
-            String: String
-        }
-    })
-
-    const userModel = connection.model("User", userSchema);
-   
-    const passwordList = userModel.find()
-
-*/}
-
-
-
-  {/*  const fetcher = (...args) => fetch(...args, {
-        cache: JSON.stringify(session.user.name),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-    }).then((res) => res.json())
-
-    function Profile() {
-        const { data, error } = useSWR('/api/handleLoad', fetcher)
-
-          if (error) return <div>Failed to load</div>
-          if (!data) return <div>Loading...</div>
-
-      return (
-     <div>
-       <h1>{data.name}</h1>
-      </div>
-  )
-}*/}
+    
 
     const ShowPasswords = async (e) => {
         e.preventDefault();
@@ -108,12 +53,10 @@ export default function Info() {
             method: 'POST',
         })
         const result = await res.json(); 
-         return 
     }
 
     const handleChange = async (e) => {
         setPassState(e.target.value)
-        console.log(passState)
     }
 
     const handleDelete = async (e) => {
@@ -130,7 +73,6 @@ export default function Info() {
             method: 'POST',
         })
         const result = await res.json();
-        console.log(result)
         setState(result.updated.ServicePasswords)
     }
 
@@ -139,7 +81,7 @@ export default function Info() {
             <>
             {state.map((value, index) => {
                 return(
-                <form onSubmit={handleDelete}>
+                <form className={styles.list} onSubmit={handleDelete}>
                     <input style={{display: 'none'}} readOnly name="user" value={session.user.name} />
                     <input style={{display: 'none'}} readOnly value={testState}/>
                     <input value={index} name="index" style={{display: 'none'}}></input>
@@ -157,12 +99,16 @@ export default function Info() {
            
            return (
                <>
-                <div>
-                <form onSubmit={handleSubmit}>
+                <div className={styles.container}>
+                <form className={styles.mainForm} onSubmit={handleSubmit}>
             <label>Service:</label>
+            <br />
            <input style={{display: 'none'}} readOnly name="user" value={session.user.name}  />
+            <br /> 
             <input name="service" type="text" placeholder="ex: Google"/>
+            <br />
             <label>Password</label>
+            <br />
             <input onChange={handleChange} value={passState} name="password" type="password" placeholder="password"/>
             
             <a > <button type="submit">Submit</button></a>
@@ -182,12 +128,16 @@ export default function Info() {
        }else{
     return (
         <>
-        <div >
-        <form onSubmit={handleSubmit}>
+        <div className={styles.container}>
+        <form className={styles.mainForm} onSubmit={handleSubmit}>
             <label>Service:</label>
+            <br/>
            <input style={{display: 'none'}} readOnly name="user" value={session.user.name}  />
+           <br />
             <input name="service" type="text" placeholder="ex: Google"/>
+            <br />
             <label>Password</label>
+            <br />
             <input onChange={handleChange} value={passState} name="password" type="password" placeholder="password"/>
             
             <button type="submit">Submit</button>

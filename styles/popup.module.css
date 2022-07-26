@@ -1,0 +1,41 @@
+.container{
+    background-color:black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.signInContainer{
+    background-image: url(../public/blob-scene-haikei.svg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.signOutButton{
+    font-size: 20px;
+    box-shadow: 5px 5px 5px 1px blue;
+}
+.button{
+    border-radius: 10px;
+    font-size: 50px;
+    animation-name: animation;
+    animation-duration: 1s;
+    color: white;
+    box-shadow: 5px 5px 5px 1px blue;
+}
+.span{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+@keyframes animation {
+    0%{
+        top: 0%
+    } 
+    100%{
+        top: 50%;
+    }
+}
