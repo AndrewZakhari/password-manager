@@ -19,13 +19,12 @@ export default function handler(req,res) {
 
         const Service = connection.model("Service", UserSchema)
 
-        Service.findOne({username: user}, (err, found) => {
+        Service.find({username: user}, (err, found) => {
             if(err) console.error(err);
-            found.ServicePasswords.map((i) => {
-                console.log(i)
-            })
+            console.log(found)
+            found[0].ServicePasswords.splice(index, 1)
             console.log(index)
-            found.save((err, updated) => {
+            found[0].save((err, updated) => {
                 if(err) console.error(err)
                 console.log(updated)
                 res.status(200).json({updated})

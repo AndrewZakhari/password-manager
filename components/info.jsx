@@ -138,10 +138,11 @@ export default function Info() {
         return (
             <>
             {state.map((value, index) => {
-                return(<form onSubmit={handleDelete}>
+                return(
+                <form onSubmit={handleDelete}>
                     <input style={{display: 'none'}} readOnly name="user" value={session.user.name} />
                     <input style={{display: 'none'}} readOnly value={testState}/>
-                    <span value={index} name="index" style={{display: 'none'}}></span>
+                    <input value={index} name="index" style={{display: 'none'}}></input>
                     
                     <span  key={index}>{value}</span>
                      <button type="submit">Delete</button>
@@ -164,9 +165,9 @@ export default function Info() {
             <label>Password</label>
             <input onChange={handleChange} value={passState} name="password" type="password" placeholder="password"/>
             
-            <a onClick={() => {setTestState(testState + 1)}}> <button type="submit">Submit</button></a>
+            <a > <button type="submit">Submit</button></a>
           </form>
-          <button onClick={() => {setTestState(testState + 1)}} type="button">Update Password List</button>
+          <button onClick={() => {setTestState(0)}} type="button">Update Password List</button>
           <button type="button" onClick={() => {setPassState(passwordGenerator.generatePassword())}}>Generate password</button>
           <form onSubmit={ShowPasswords}>
             <input style={{display: 'none'}} readOnly name="user" value={session.user.name}/>
