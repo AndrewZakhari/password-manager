@@ -1,6 +1,8 @@
 .container{
     background-color:black;
     position: fixed;
+    left: 0%;
+    right: 0%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
