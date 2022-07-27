@@ -1,4 +1,5 @@
 .container{
+    margin-top: 30px;
     height: max-content;
     min-height: 100vh;
     background-image: url(../public/blob-scene-haikei.svg);
