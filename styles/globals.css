@@ -20,11 +20,12 @@ button{
   border-radius: 5px;
   padding: 5px;
   background-color: #3456ff;
- color: white;
+ color: black;
  border:#3456ff;
  margin: 10px;
  box-shadow: 5px 5px 7px 0.5px blue;
  max-width: fit-content;
+  font-weight: bold;
  
 }
 button:hover{
