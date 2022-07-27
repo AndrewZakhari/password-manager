@@ -1,5 +1,5 @@
 .container{
-    margin-top: 30px;
+  
     height: max-content;
     min-height: 100vh;
     background-image: url(../public/blob-scene-haikei.svg);
@@ -23,7 +23,7 @@
     flex-shrink: 10px;
 }
 .mainForm {
-    
+    margin-top: 50px;
     padding: 10px;
     background-color:rgba(0, 0, 0, 0.5);
     margin: 10px;
