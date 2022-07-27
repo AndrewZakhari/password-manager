@@ -23,9 +23,10 @@
     flex-shrink: 10px;
 }
 .mainForm {
-    margin-top: 50px;
+  
     padding: 10px;
     background-color:rgba(0, 0, 0, 0.5);
     margin: 10px;
+    margin-top: 50px;
     border-radius: 1vw;
 }
